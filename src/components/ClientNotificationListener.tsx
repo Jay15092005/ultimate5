@@ -195,6 +195,16 @@ export function ClientNotificationListener() {
     }
   };
 
+  // Add a cleanup effect for agoraClient
+  useEffect(() => {
+    return () => {
+      if (agoraClient) {
+        agoraClient.removeAllListeners && agoraClient.removeAllListeners();
+        agoraClient.leave && agoraClient.leave();
+      }
+    };
+  }, [agoraClient]);
+
   if (!toast) return null;
   // Toast UI (centered, beautiful)
   return (

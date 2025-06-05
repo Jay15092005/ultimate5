@@ -59,6 +59,16 @@ export function ClientJoinCallListener() {
     };
   }, []);
 
+  // Add a cleanup effect for agoraClient
+  useEffect(() => {
+    return () => {
+      if (agoraClient) {
+        agoraClient.removeAllListeners && agoraClient.removeAllListeners();
+        agoraClient.leave && agoraClient.leave();
+      }
+    };
+  }, [agoraClient]);
+
   if (!acceptedCall || !modalOpen) return null;
 
   return (

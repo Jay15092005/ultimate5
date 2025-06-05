@@ -99,6 +99,8 @@ export function AdvisorCallHandler() {
         setLocalAudioTrack(null);
       }
       if (agoraClient) {
+        // Remove all event listeners
+        agoraClient.removeAllListeners && agoraClient.removeAllListeners();
         await agoraClient.leave();
         setAgoraClient(null);
       }

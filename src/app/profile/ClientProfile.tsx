@@ -352,6 +352,8 @@ export default function ClientProfile() {
   // Extract leave call logic to a function
   const handleLeaveCall = async () => {
     if (agoraClient) {
+      // Remove all event listeners
+      agoraClient.removeAllListeners && agoraClient.removeAllListeners();
       await agoraClient.leave();
       setJoined(false);
       setAgoraClient(null);
